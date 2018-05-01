@@ -6,6 +6,7 @@ import CircleSvg from 'svg/circle.svg';
 import SquareSvg from 'svg/square.svg';
 import TriangleSvg from 'svg/triangle.svg';
 import bookImg from 'img/book2.jpg';
+import Recipe from './recipes/Recipe'
 
 @connect(state => ({
   counter: state.app.get('counter'),
@@ -20,94 +21,6 @@ export default class Home extends Component {
   
 
   render() {
-      const recipes = [
-      {
-        name: `m&m's cereal`,
-        imageURL: '',
-        description: `it's like cereal if all of it was m&m's`,
-        ingredients: [
-          `milk`,
-          `m&m's`,
-          `bowl`,
-        ],
-        steps: [
-          `pour a small gentleman's mountain of m&m's in bowl`,
-          `add milk`,
-          `serve`,
-        ],
-      },
-      {
-        name: `m&m's cereal`,
-        imageURL: '',
-        description: `it's like cereal if all of it was m&m's`,
-        ingredients: [
-          `milk`,
-          `m&m's`,
-          `bowl`,
-        ],
-        steps: [
-          `pour a small gentleman's mountain of m&m's in bowl`,
-          `add milk`,
-          `serve`,
-        ],
-      },
-      {
-        name: `m&m's cereal`,
-        imageURL: '',
-        description: `it's like cereal if all of it was m&m's`,
-        ingredients: [
-          `milk`,
-          `m&m's`,
-          `bowl`,
-        ],
-        steps: [
-          `pour a small gentleman's mountain of m&m's in bowl`,
-          `add milk`,
-          `serve`,
-        ],
-      },
-      {
-        name: `m&m's cereal`,
-        imageURL: '',
-        description: `it's like cereal if all of it was m&m's`,
-        ingredients: [
-          `milk`,
-          `m&m's`,
-          `bowl`,
-        ],
-        steps: [
-          `pour a small gentleman's mountain of m&m's in bowl`,
-          `add milk`,
-          `serve`,
-        ],
-      },
-      {
-        name: `m&m's cereal`,
-        imageURL: '',
-        description: `it's like cereal if all of it was m&m's`,
-        ingredients: [
-          `milk`,
-          `m&m's`,
-          `bowl`,
-        ],
-        steps: [
-          `pour a small gentleman's mountain of m&m's in bowl`,
-          `add milk`,
-          `serve`,
-        ],
-      },
-    ]
-
-    const Recipes = function () {
-      return (
-        <div>
-          I'm a recipe!
-          {recipes.map(function(recipe, idx){
-            return <div>{recipe.name}</div>;
-          })}
-        </div>
-      )
-    }
 
     const {
       counter,
@@ -129,7 +42,7 @@ export default class Home extends Component {
         <h1>Popular Recipes</h1>
 
         
-        <Recipes />
+        <Recipe />
 
       </div>
     );
