@@ -26,6 +26,8 @@ export default class Home extends Component {
       counter,
     } = this.props; 
 
+    console.log('this.props: ', this.props)
+
     return (
       <div className='Home'>
         <h1>Recipe Flix</h1>
@@ -33,12 +35,12 @@ export default class Home extends Component {
           Serving recipes fastest so you can serve the best.
         </p>
 
-        <h2>Add A Recipe</h2>
+{/*        <h2>Add A Recipe</h2>
 
         <h2>Search</h2>
         
         <hr />
-
+*/}
         <h1>Popular Recipes</h1>
 
         

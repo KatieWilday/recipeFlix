@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { routeCodes } from 'constants/routes';
 import workAndCoLogoImg from 'img/workco-logo.svg';
+import recipeFlixLogo from 'img/recipeFlixLogo.png';
 
 export default class Menu extends Component {
   render() {
@@ -10,8 +11,8 @@ export default class Menu extends Component {
         <div className='Menu-logo'>
           <a href='https://work.co' target='_blank' rel='noreferrer noopener' aria-label='Work & Co website'>
             <img
-              src={ workAndCoLogoImg }
-              alt='Work & Co logo'
+              src={ recipeFlixLogo }
+              alt='RecipeFlix logo'
             />
           </a>
         </div>
@@ -27,9 +28,9 @@ export default class Menu extends Component {
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
-            to={ routeCodes.PEOPLE }
+            to={ routeCodes.RECIPES }
           >
-            API data example
+            Recipes
           </NavLink>
           <NavLink
             activeClassName='Menu-link--active'
