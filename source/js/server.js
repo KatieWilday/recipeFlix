@@ -12,6 +12,7 @@ import transit from 'transit-immutable-js';
 import configureStore from 'config/store';
 import getServerHtml from 'components/server/ServerHTML';
 import App from 'views/App';
+import models from './db/models'
 
 import { getPeopleServer } from 'sagas/people';
 
@@ -93,6 +94,82 @@ function handleRequest(req, res, sagas = null, sagaArgs = {}) {
 app.get('/people', (req, res) => {
   handleRequest(req, res, [getPeopleServer]);
 });
+
+
+/* 
+ * USER ROUTES
+ */
+
+// user create
+app.post('/users/create', (req, res) => {
+  console.log('hello!!!!!')
+  console.log('req: ', req)
+  console.log('res: ', res)
+  console.log('models: ', models)
+
+  models.User.create({
+    username: req.body.username
+  }).then(() => {
+    console.log('created user!')
+    res.redirect('/users')
+  })
+})
+
+// user destroy
+app.get('/:user_id/destroy', (req, res) => {
+  models.User.destroy({
+    where: {
+      id: req.params.user_id
+    }
+  }).then(() => {
+    console.log('destroyed user with user_id: ', req.params.user_id)
+    res.redirect('/recipes')
+  })
+})
+
+app.get('/users', (req, res) => {
+  models.User.findAll().then((users) => {
+    console.log('users; ', users)
+    res.json(users)
+  })
+})
+
+
+
+
+/* 
+ * RECIPE ROUTES
+ */
+
+// recipe create
+app.post('/:user_id/recipe/create', (req, res) => {
+  models.Recipe.create({
+    name: req.body.name,
+    imageSrc: req.body.imageSrc,
+    imageUrl: req.body.imageUrl,
+    description: req.body.description,
+    ingredients: req.body.ingredients,
+    steps: req.body.steps,
+  }).then(() => {
+    console.log('created recipe!')
+    res.redirect('/recipes')
+  })
+})
+
+
+// recipe destroy
+app.get('/:user_id/recipes/:recipe_id/destroy', (req, res) => {
+  models.Recipe.destroy({
+    where: {
+      id: req.params.recipe_id
+    }
+  }).then(() => {
+    console.log('destroyed recipe with recipe_id: ', req.params.recipe_id)
+    res.redirect('/recipes')
+  })
+})
+
+
 
 // All other routes
 app.use((req, res) => {

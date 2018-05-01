@@ -35,9 +35,9 @@ export default class Menu extends Component {
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
-            to='/404'
+            to={ routeCodes.RECIPES_CREATE }
           >
-            404
+            Create Recipe
           </NavLink>
         </div>
       </div>
