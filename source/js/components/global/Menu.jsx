@@ -39,6 +39,13 @@ export default class Menu extends Component {
           >
             Create Recipe
           </NavLink>
+          <NavLink
+            activeClassName='Menu-link--active'
+            className='Menu-link'
+            to={ routeCodes.USERS_CREATE }
+          >
+            Create User
+          </NavLink>
         </div>
       </div>
     );

@@ -5,4 +5,5 @@ export const routeCodes = {
   PEOPLE: `${ publicPath }people`,
   RECIPES: '/recipes',
   RECIPES_CREATE: '/createRecipe',
+  USERS_CREATE: '/createUser',
 };
