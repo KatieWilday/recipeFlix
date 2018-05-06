@@ -19,7 +19,7 @@ export default class RecipeCreate extends Component {
 
         	<input type="text" name="name" placeholder="Milksteak for 2"/> 
         	<textarea name="description"></textarea>
-        	<input onsubmit={submitHandle} type="submit" value="Create Recipe"/>
+        	<input onSubmit={submitHandle} type="submit" value="Create Recipe"/>
         </form>
 
       </div>

@@ -46,6 +46,13 @@ export default class Menu extends Component {
           >
             Create User
           </NavLink>
+          <NavLink
+            activeClassName='Menu-link--active'
+            className='Menu-link'
+            to={ routeCodes.USERS_GET_ALL }
+          >
+            View All Users
+          </NavLink>
         </div>
       </div>
     );

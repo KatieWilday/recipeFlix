@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { userCreate } from 'actions/app'
 
+
 @connect(state => ({
   user: state.app.get('user'),
 }))
@@ -24,12 +25,18 @@ export default class UserCreate extends Component {
 
 	}
 
-
   render() {
+    // get all users
 
     return (
       <div className='Home'>
         <h1>Create User</h1>
+
+        <h2>Users:</h2>
+        <p>
+          {users}
+        </p>
+
         <form>
         	<input type="text" name="username" placeholder="Alice Cooper"/> 
         	<button onClick={ this.clickHandle }>

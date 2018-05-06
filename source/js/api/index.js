@@ -1,6 +1,8 @@
 // Simple API wrapper
 
-const API_URL = 'https://swapi.co/api';
+// const API_URL = 'https://swapi.co/api';
+const API_URL = 'http://0.0.0.0:8080';
+
 
 // Custom API error to throw
 function ApiError(message, data, status) {
@@ -41,14 +43,22 @@ const fetchResource = (path, userOptions = {}) => {
     ...defaultOptions,
     ...userOptions,
     // Merge headers
+    mode: 'cors',
     headers: {
       ...defaultHeaders,
       ...userOptions.headers,
+      'Access-Control-Allow-Origin': 'http://0.0.0.0:8080/*',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept',
     },
+    method: 'GET',
   };
+
 
   // Build Url
   const url = `${ API_URL }/${ path }`;
+
+  console.log('url: ', url)
 
   // Detect is we are uploading a file
   const isFile = typeof window !== 'undefined' && options.body instanceof File;
@@ -62,8 +72,12 @@ const fetchResource = (path, userOptions = {}) => {
   // Variable which will be used for storing response
   let response = null;
 
+
+  console.log('options11: ', options)
+
   return fetch(url, options)
     .then(responseObject => {
+      console.log('fire1')
       // Saving response for later use in lower scopes
       response = responseObject;
 
@@ -85,6 +99,7 @@ const fetchResource = (path, userOptions = {}) => {
     // "parsedResponse" will be either text or javascript object depending if
     // "response.text()" or "response.json()" got called in the upper scope
     .then(parsedResponse => {
+      console.log('fire2')
       // Check for HTTP error codes
       if (response.status < 200 || response.status >= 300) {
         // Throw error
@@ -95,11 +110,14 @@ const fetchResource = (path, userOptions = {}) => {
       return parsedResponse;
     })
     .catch(error => {
+      console.log('fire3')
       // Throw custom API error
       // If response exists it means HTTP error occured
       if (response) {
+        console.log('fire4')
         throw ApiError(`Request failed with status ${ response.status }.`, error, response.status);
       } else {
+        console.log('fire5')
         throw ApiError(error.toString(), null, 'REQUEST_FAILED');
       }
     });
@@ -109,6 +127,11 @@ function getPeople() {
   return fetchResource('people/');
 }
 
+function getUserAll() {
+  return fetchResource('getAllUsers')
+}
+
 export default {
   getPeople,
+  getUserAll,
 };

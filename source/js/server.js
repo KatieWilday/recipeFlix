@@ -15,13 +15,33 @@ import App from 'views/App';
 import models from './db/models'
 
 import { getPeopleServer } from 'sagas/people';
+import { userGetAllServer } from 'sagas/users';
+import 'cors' from 'cors';
 
 // Load SCSS
 import 'index.css';
 
 const app = express();
+app.options('*', cors())
+app.use(cors())
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+
+  req.header("Access-Control-Allow-Origin", "*");
+  req.header("Access-Control-Allow-Credentials", "true");
+  req.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+  req.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  
+  next();
+});
+
 const hostname = 'localhost';
 const port = 8080;
+
+
 
 // ENV
 const IS_DEVELOPMENT = app.get('env') === 'development';
@@ -61,12 +81,15 @@ function sendResponse(req, res, store) {
   }
 }
 
+
 // This method will wait for all sagas to be finished
 // and async data stored to a reducer before sending the response.
 // If there are no sagas or sagas fail, it will return response without async data.
 function handleRequest(req, res, sagas = null, sagaArgs = {}) {
   // Creates empty store for each request
   const config = configureStore(sagas, sagaArgs);
+  console.log('config: ', config)
+
 
   if (config.tasks) {
     const tasksEndPromises = config.tasks.map(task => task.done);
@@ -94,6 +117,10 @@ function handleRequest(req, res, sagas = null, sagaArgs = {}) {
 app.get('/people', (req, res) => {
   handleRequest(req, res, [getPeopleServer]);
 });
+
+app.get('/getAllUsers', (req, res) => {
+  handleRequest(req, res, [userGetAllServer]);
+})
 
 
 /* 
@@ -186,6 +213,8 @@ app.use((error, req, res) => {
     error: IS_DEVELOPMENT ? error : null,
   });
 });
+
+
 
 // Start listening
 app.listen(port, (error) => {
