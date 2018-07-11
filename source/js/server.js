@@ -114,13 +114,13 @@ function handleRequest(req, res, sagas = null, sagaArgs = {}) {
 // pass two additional params to "handleRequest"
 // array of sagas which should be completed
 // and object containing saga's options (usually req.params)
-app.get('/people', (req, res) => {
-  handleRequest(req, res, [getPeopleServer]);
-});
+// app.get('/people', (req, res) => {
+//   handleRequest(req, res, [getPeopleServer]);
+// });
 
-app.get('/getAllUsers', (req, res) => {
-  handleRequest(req, res, [userGetAllServer]);
-})
+// app.get('/getAllUsers', (req, res) => {
+//   handleRequest(req, res, [userGetAllServer]);
+// })
 
 
 /* 
@@ -128,38 +128,38 @@ app.get('/getAllUsers', (req, res) => {
  */
 
 // user create
-app.post('/users/create', (req, res) => {
-  console.log('hello!!!!!')
-  console.log('req: ', req)
-  console.log('res: ', res)
-  console.log('models: ', models)
+// app.post('/users/create', (req, res) => {
+//   console.log('hello!!!!!')
+//   console.log('req: ', req)
+//   console.log('res: ', res)
+//   console.log('models: ', models)
 
-  models.User.create({
-    username: req.body.username
-  }).then(() => {
-    console.log('created user!')
-    res.redirect('/users')
-  })
-})
+//   models.User.create({
+//     username: req.body.username
+//   }).then(() => {
+//     console.log('created user!')
+//     res.redirect('/users')
+//   })
+// })
 
-// user destroy
-app.get('/:user_id/destroy', (req, res) => {
-  models.User.destroy({
-    where: {
-      id: req.params.user_id
-    }
-  }).then(() => {
-    console.log('destroyed user with user_id: ', req.params.user_id)
-    res.redirect('/recipes')
-  })
-})
+// // user destroy
+// app.get('/:user_id/destroy', (req, res) => {
+//   models.User.destroy({
+//     where: {
+//       id: req.params.user_id
+//     }
+//   }).then(() => {
+//     console.log('destroyed user with user_id: ', req.params.user_id)
+//     res.redirect('/recipes')
+//   })
+// })
 
-app.get('/users', (req, res) => {
-  models.User.findAll().then((users) => {
-    console.log('users; ', users)
-    res.json(users)
-  })
-})
+// app.get('/users', (req, res) => {
+//   models.User.findAll().then((users) => {
+//     console.log('users; ', users)
+//     res.json(users)
+//   })
+// })
 
 
 
