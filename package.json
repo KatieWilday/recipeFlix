@@ -63,6 +63,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "cors": "^2.8.4",
     "express": "^4.16.2",

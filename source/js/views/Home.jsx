@@ -7,6 +7,8 @@ import SquareSvg from 'svg/square.svg';
 import TriangleSvg from 'svg/triangle.svg';
 import bookImg from 'img/book2.jpg';
 
+// adds counter to this.props!
+// AKA map state to props
 @connect(state => ({
   counter: state.app.get('counter'),
 }))

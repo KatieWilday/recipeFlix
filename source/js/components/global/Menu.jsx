@@ -53,6 +53,13 @@ export default class Menu extends Component {
           >
             View All Users
           </NavLink>
+          <NavLink
+            activeClassName='Menu-link--active'
+            className='Menu-link'
+            to={ routeCodes.REVIEWS }
+          >
+            Reviews
+          </NavLink>
         </div>
       </div>
     );

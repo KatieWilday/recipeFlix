@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { userGetAll } from 'actions/user';
+// import { userGetAll } from 'actions/user';
+import axios from 'axios';
 
 @connect(state => ({
   error: state.user.get('error'),
   loading: state.user.get('loading'),
-  user: state.user.get('users'),
+  // users: state.user.get('users'),
 }))
 export default class UserShowAll extends Component {
   static propTypes = {
@@ -17,38 +18,59 @@ export default class UserShowAll extends Component {
     dispatch: PropTypes.func,
   }
 
-  componentWillMount() {
-    const {
-      dispatch,
-      users,
-    } = this.props;
+  constructor(props) {
+    super(props);
 
-    if (!users) {
-      dispatch(userGetAll());
+    this.state = {
+      users: [],
+    };
+  }
+
+  componentDidMount() {
+    const { users } = this.state;
+
+    if (users.length === 0) {
+
+      axios.get('http://localhost:8008/users')
+        .then((data) => {
+          this.setState({ users: data.data });
+        })
+        .catch(err => console.error('err!!: ', err))
     }
+    
+    // const { dispatch } = this.props;
+    // if (!users) {
+    //   dispatch(userGetAll());
+    // }
+  }
+
+  getData(req) {
+    return fetch(req)
+      .then(res => res.json())
+      .catch(err => console.error('error!!: ', err));
   }
 
   renderUsers() {
-    const {
-      users,
-    } = this.props;
+    const { users } = this.state;
 
-    return users.results.map(user => {
-      return (
-        <div className='People-person'>
-          <h3>{ user.username }</h3>
-          <div>Email: { user.email }</div>
-        </div>
-      );
-    });
+    console.log('this.state: ', this.state)
+    return 
+  }
+
+  showUserClick(e) {
+    let id = e.target.getAttribute('user-id');
+    // console.log('e.target: ', e.target.)
+    // window.tester = e
+    window.location.href = `users/${ id }`;
   }
 
   render() {
     const {
       loading,
       error,
-      users,
     } = this.props;
+
+    const { users } = this.state;
 
     return (
       <div className='People'>
@@ -56,7 +78,19 @@ export default class UserShowAll extends Component {
         { loading && <div>Loading users...</div> }
         { error && error.toString() }
         <div className='People-list'>
-          { users && this.renderUsers() }
+          { users && users.map(user => {
+            return (
+              <div className='People-person'>
+                <h3>
+                  <button user-id={ user.id } onClick={ this.showUserClick }>
+                    { user.username }
+                  </button>
+                </h3>
+                <div>Email: { user.email }</div>
+              </div>
+            );
+          })
+          }
         </div>
       </div>
     );

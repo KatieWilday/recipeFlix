@@ -10,6 +10,8 @@ import NotFound from 'views/NotFound';
 import RecipeCreate from 'views/recipes/Create';
 import UserCreate from 'views/users/Create';
 import UsersAll from 'views/users/Index';
+import Reviews from 'views/reviews/Reviews';
+import UsersShow from 'views/users/Show';
 import { Helmet } from 'react-helmet';
 
 
@@ -31,6 +33,8 @@ class App extends Component {
             <Route path={ routeCodes.RECIPES_CREATE } component={ RecipeCreate } />
             <Route path={ routeCodes.USERS_CREATE } component={ UserCreate } />
             <Route path={ routeCodes.USERS_GET_ALL } component={ UsersAll } />
+            <Route path={ routeCodes.REVIEWS } component={ Reviews } />
+            <Route path={ routeCodes.USERS_SHOW } component={ UsersShow } />
             <Route path='*' component={ NotFound } />
           </Switch>
         </div>

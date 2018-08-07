@@ -27,7 +27,7 @@ export default class UserCreate extends Component {
 
   render() {
     // get all users
-
+    console.log('this.props: ', this.props)
     return (
       <div className='Home'>
         <h1>Create User</h1>
@@ -38,8 +38,8 @@ export default class UserCreate extends Component {
         </p>
 
         <form>
-        	<input type="text" name="username" placeholder="Alice Cooper"/> 
-        	<button onClick={ this.clickHandle }>
+          <input type="text" name="username" placeholder="Alice Cooper"/> 
+          <button onClick={ this.clickHandle }>
             Create User
           </button>
         </form>
