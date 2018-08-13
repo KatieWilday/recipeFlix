@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { userCreate } from 'actions/app'
+import { userCreate } from 'actions/app';
 
 
 @connect(state => ({
@@ -14,13 +14,13 @@ export default class UserCreate extends Component {
   }
 
 	clickHandle = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    console.log('submitHandle called, e.target  : ', e.target)
-    window.tester = e.target
-    const { dispatch } = this.props
+    e.preventDefault();
+    e.stopPropagation();
+  console.log('submitHandle called, e.target  : ', e.target);
+  window.tester = e.target;
+  const { dispatch } = this.props;
 
-    const username = e.target.parentElement.children['username'].value
+    const username = e.target.parentElement.children['username'].value;
     dispatch(userCreate(username));
 
 	}
@@ -32,13 +32,11 @@ export default class UserCreate extends Component {
       <div className='Home'>
         <h1>Create User</h1>
 
-        <h2>Users:</h2>
-        <p>
-          {users}
-        </p>
-
         <form>
-          <input type="text" name="username" placeholder="Alice Cooper"/> 
+          <input type="text" name="username" placeholder="Enter Name"/>
+          <br/> 
+          <input type="email" name="userEmail" placeholder="Enter Email" />
+          <br/>
           <button onClick={ this.clickHandle }>
             Create User
           </button>
